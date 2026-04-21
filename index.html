@@ -661,13 +661,40 @@ document.addEventListener('touchend',ckHandle,{passive:false});
     }, 520);
   }
 
-  logo.addEventListener('mousedown', function(e){ e.preventDefault(); startDrag(e.clientX, e.clientY); });
-  document.addEventListener('mousemove', function(e){ moveDrag(e.clientX, e.clientY); });
-  document.addEventListener('mouseup', endDrag);
+  var pendingX, pendingY, pending = false;
 
-  logo.addEventListener('touchstart', function(e){ e.preventDefault(); startDrag(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
-  document.addEventListener('touchmove', function(e){ if(dragging){ e.preventDefault(); moveDrag(e.touches[0].clientX, e.touches[0].clientY); } }, {passive:false});
-  document.addEventListener('touchend', endDrag);
+  logo.addEventListener('mousedown', function(e){
+    e.preventDefault();
+    pending = true;
+    pendingX = e.clientX; pendingY = e.clientY;
+  });
+  document.addEventListener('mousemove', function(e){
+    if(pending && !dragging){
+      var dx = Math.abs(e.clientX - pendingX);
+      var dy = Math.abs(e.clientY - pendingY);
+      if(dx > 5 || dy > 5){ pending = false; startDrag(pendingX, pendingY); }
+    }
+    moveDrag(e.clientX, e.clientY);
+  });
+  document.addEventListener('mouseup', function(){
+    pending = false;
+    endDrag();
+  });
+
+  logo.addEventListener('touchstart', function(e){
+    e.preventDefault();
+    pending = true;
+    pendingX = e.touches[0].clientX; pendingY = e.touches[0].clientY;
+  }, {passive:false});
+  document.addEventListener('touchmove', function(e){
+    if(pending && !dragging){
+      var dx = Math.abs(e.touches[0].clientX - pendingX);
+      var dy = Math.abs(e.touches[0].clientY - pendingY);
+      if(dx > 5 || dy > 5){ pending = false; startDrag(pendingX, pendingY); }
+    }
+    if(dragging){ e.preventDefault(); moveDrag(e.touches[0].clientX, e.touches[0].clientY); }
+  }, {passive:false});
+  document.addEventListener('touchend', function(){ pending = false; endDrag(); });
 
   logo.style.cursor = 'grab';
 })();
