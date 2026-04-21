@@ -594,61 +594,72 @@ document.addEventListener('touchend',ckHandle,{passive:false});
 (function(){
   var logo = document.querySelector('.hero-logo');
   if(!logo) return;
-  var dragging = false, startX, startY, offX = 0, offY = 0, curX = 0, curY = 0;
-  var raf = null;
 
-  function setPos(x, y){
-    curX = x; curY = y;
-    logo.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  var dragging = false;
+  var startMouseX, startMouseY, startLeft, startTop;
+  var origLeft, origTop;
+
+  function getRect(){
+    var r = logo.getBoundingClientRect();
+    return r;
+  }
+
+  function startDrag(mx, my){
+    dragging = true;
     logo.style.animationPlayState = 'paused';
-  }
-  function resetPos(){
-    logo.style.transition = 'transform .5s cubic-bezier(.34,1.5,.64,1)';
-    logo.style.transform = 'translate(0,0)';
-    logo.style.animationPlayState = 'running';
-    setTimeout(function(){ logo.style.transition = ''; }, 500);
-  }
-
-  logo.addEventListener('mousedown', function(e){
-    dragging = true;
-    startX = e.clientX - offX;
-    startY = e.clientY - offY;
+    logo.style.transition = 'none';
     logo.style.cursor = 'grabbing';
-    e.preventDefault();
-  });
-  document.addEventListener('mousemove', function(e){
-    if(!dragging) return;
-    offX = e.clientX - startX;
-    offY = e.clientY - startY;
-    setPos(offX, offY);
-  });
-  document.addEventListener('mouseup', function(){
-    if(!dragging) return;
-    dragging = false;
-    offX = 0; offY = 0;
-    logo.style.cursor = 'grab';
-    resetPos();
-  });
+    logo.style.zIndex = '9999';
 
-  // touch
-  logo.addEventListener('touchstart', function(e){
-    dragging = true;
-    startX = e.touches[0].clientX - offX;
-    startY = e.touches[0].clientY - offY;
-    e.preventDefault();
-  }, {passive:false});
-  document.addEventListener('touchmove', function(e){
+    // เปลี่ยน logo เป็น fixed position
+    var r = logo.getBoundingClientRect();
+    origLeft = r.left;
+    origTop = r.top;
+    logo.style.position = 'fixed';
+    logo.style.left = r.left + 'px';
+    logo.style.top = r.top + 'px';
+    logo.style.margin = '0';
+
+    startMouseX = mx;
+    startMouseY = my;
+    startLeft = r.left;
+    startTop = r.top;
+  }
+
+  function moveDrag(mx, my){
     if(!dragging) return;
-    offX = e.touches[0].clientX - startX;
-    offY = e.touches[0].clientY - startY;
-    setPos(offX, offY);
-  }, {passive:true});
-  document.addEventListener('touchend', function(){
+    var dx = mx - startMouseX;
+    var dy = my - startMouseY;
+    logo.style.left = (startLeft + dx) + 'px';
+    logo.style.top = (startTop + dy) + 'px';
+  }
+
+  function endDrag(){
     if(!dragging) return;
     dragging = false;
-    offX = 0; offY = 0;
-    resetPos();
-  });
+    logo.style.cursor = 'grab';
+    // bounce กลับ
+    logo.style.transition = 'left .5s cubic-bezier(.34,1.5,.64,1), top .5s cubic-bezier(.34,1.5,.64,1)';
+    logo.style.left = origLeft + 'px';
+    logo.style.top = origTop + 'px';
+    setTimeout(function(){
+      logo.style.position = '';
+      logo.style.left = '';
+      logo.style.top = '';
+      logo.style.margin = '';
+      logo.style.transition = '';
+      logo.style.zIndex = '';
+      logo.style.animationPlayState = 'running';
+    }, 520);
+  }
+
+  logo.addEventListener('mousedown', function(e){ e.preventDefault(); startDrag(e.clientX, e.clientY); });
+  document.addEventListener('mousemove', function(e){ moveDrag(e.clientX, e.clientY); });
+  document.addEventListener('mouseup', endDrag);
+
+  logo.addEventListener('touchstart', function(e){ e.preventDefault(); startDrag(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+  document.addEventListener('touchmove', function(e){ if(dragging){ e.preventDefault(); moveDrag(e.touches[0].clientX, e.touches[0].clientY); } }, {passive:false});
+  document.addEventListener('touchend', endDrag);
 
   logo.style.cursor = 'grab';
 })();
