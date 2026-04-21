@@ -67,6 +67,13 @@ body{
 .sec-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px;}
 .see-all{font-size:12px;font-weight:700;color:var(--red);text-decoration:none;}
 
+/* ── CAT ICON FLOAT ── */
+@keyframes catFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.cat-ico img{animation:catFloat 3s ease-in-out infinite;}
+.cat-card:nth-child(2) .cat-ico img{animation-delay:.4s;}
+.cat-card:nth-child(3) .cat-ico img{animation-delay:.8s;}
+.cat-card:nth-child(4) .cat-ico img{animation-delay:1.2s;}
+
 /* ── CAT GRID ── */
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 @media(max-width:500px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
@@ -256,22 +263,22 @@ body.dark .hero-title em{color:var(--red) !important;}
   </div>
   <div class="cat-grid">
     <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
-      <div class="cat-ico"><img src="https://pic.in.th/image/ROBUX.D3ISTO" alt="ROBLOX"></div>
+      <div class="cat-ico"><img src="https://img1.pic.in.th/images/ROBUX.webp" alt="ROBLOX"></div>
       <div class="cat-name">ไก่ตันคัดพิเศษ<br>ROBLOX</div>
-      <div class="cat-pill">HOT 🔥</div>
+      <div class="cat-pill">เปิดดู ›</div>
     </a>
     <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
-      <div class="cat-ico"><img src="https://pic.in.th/image/24ff776b-c430-4550-853b-58492df82a0f.D3Ix4A" alt="ROV"></div>
+      <div class="cat-ico"><img src="https://img1.pic.in.th/images/24ff776b-c430-4550-853b-58492df82a0fb0cc3e31c7aa6b58.png" alt="ROV"></div>
       <div class="cat-name">เติมคูปอง<br>ROV</div>
       <div class="cat-pill">เปิดดู ›</div>
     </a>
     <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
-      <div class="cat-ico"><img src="https://pic.in.th/image/8984f4fb-cccb-4df6-a406-feafbf0d82ff.D3IcHP" alt="MLBB"></div>
+      <div class="cat-ico"><img src="https://img2.pic.in.th/8984f4fb-cccb-4df6-a406-feafbf0d82ff.png" alt="MLBB"></div>
       <div class="cat-name">เติมเพชร<br>MLBB</div>
       <div class="cat-pill">เปิดดู ›</div>
     </a>
     <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
-      <div class="cat-ico"><img src="https://pic.in.th/image/e6b8d9a4-08bf-40fc-abee-de43711d6286.D3IXjc" alt="FREEFIRE"></div>
+      <div class="cat-ico"><img src="https://img2.pic.in.th/e6b8d9a4-08bf-40fc-abee-de43711d6286d1f20a4abfee87b6.png" alt="FREEFIRE"></div>
       <div class="cat-name">เติมเพชร<br>FREEFIRE</div>
       <div class="cat-pill">เปิดดู ›</div>
     </a>
