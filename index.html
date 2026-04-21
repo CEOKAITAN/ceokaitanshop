@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEO KAITAN — ร้านไอดีไก่ตัน Blox Fruit</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#e00000;--red-d:#a80000;--gold:#ffc300;
+  --text:#111;--muted:#777;--border:#eee;--card:#fff;
+  --col-w:860px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Kanit',sans-serif;color:var(--text);overflow-x:hidden;
+  background:url('https://img2.pic.in.th/bg-2451f0fc02f55a8b0.jpg') center top / cover fixed;
+}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid #eee;height:52px;display:flex;align-items:center;justify-content:center;width:100%;}
+.nav-inner{width:100%;max-width:var(--col-w);padding:0 20px;display:flex;align-items:center;justify-content:space-between;}
+.nav-name{font-size:26px;font-weight:900;color:#000;letter-spacing:-0.5px;}
+.nav-name em{color:var(--red);font-style:normal;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-icon-btn{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.1);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;transition:background .15s;text-decoration:none;}
+.nav-icon-btn:hover{background:rgba(0,0,0,0.08);}
+.nav-cta{background:var(--red);color:#fff;font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;padding:8px 18px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;}
+.nav-cta:hover{background:var(--red-d);}
+
+/* ── COL ── */
+.col{max-width:var(--col-w);margin:0 auto;background:#fff;min-height:100vh;}
+
+/* ── HERO ── */
+.hero{padding:20px 20px 0;}
+.hero-card{background:#fff;border-radius:20px;border:1px solid rgba(224,0,0,0.12);padding:20px;box-shadow:0 4px 20px rgba(224,0,0,0.07);position:relative;overflow:hidden;}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e00000,#ffc300,#e00000);}
+.hero-top{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.hero-logo{width:76px;height:76px;border-radius:18px;flex-shrink:0;background:transparent;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:none;animation:logoFloat 3s ease-in-out infinite;}
+@keyframes logoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.hero-info{flex:1;}
+.hero-title{font-size:26px;font-weight:900;color:#111;line-height:1.1;margin-bottom:4px;}
+.hero-title em{color:var(--red);font-style:normal;}
+.hero-sub{font-size:12px;color:#666;line-height:1.5;margin-bottom:10px;}
+.hero-open{display:inline-flex;align-items:center;gap:6px;background:rgba(0,200,80,0.12);border:1px solid rgba(0,200,80,0.3);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:600;color:#00b050;}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:#00c851;flex-shrink:0;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.ck-badge{display:flex;align-items:center;gap:3px;border-radius:999px;padding:5px 11px;font-size:10px;font-weight:600;border:1px solid;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+@media(min-width:600px){.ck-badge{padding:7px 14px;font-size:11px;}}
+.ck-badge:active{opacity:0.7;}
+.ck-badge-gold{background:rgba(255,195,0,0.1);border-color:rgba(255,195,0,0.35);color:#7a5500;}
+.ck-badge-red{background:rgba(224,0,0,0.06);border-color:rgba(224,0,0,0.2);color:#e00000;}
+.ck-badge-green{background:rgba(0,180,80,0.08);border-color:rgba(0,180,80,0.25);color:#006830;}
+.hero-btns{display:flex;gap:10px;}
+.btn-p{flex:1;background:var(--red);color:#fff;font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;padding:12px;border-radius:13px;border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(224,0,0,0.35);transition:background .15s;}
+.btn-p:hover{background:var(--red-d);}
+.btn-s{flex:1;background:#f0f0f0;color:#333;border:1.5px solid #ddd;font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;padding:12px;border-radius:13px;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s;}
+.btn-s:hover{background:#e5e5e5;}
+
+/* ── SECTION ── */
+.sec{padding:24px 20px 0;}
+.sec-head{margin-bottom:16px;}
+.sec-title{font-size:20px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:7px;}
+.sec-sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.sec-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px;}
+.see-all{font-size:12px;font-weight:700;color:var(--red);text-decoration:none;}
+
+/* ── CAT GRID ── */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:500px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+.cat-card{background:#fff;border-radius:16px;border:1.5px solid var(--border);padding:18px 12px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;transition:border-color .18s,transform .2s;position:relative;overflow:hidden;}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform .2s;}
+.cat-card:hover{border-color:rgba(224,0,0,0.4);transform:translateY(-3px);}
+.cat-card:hover::before{transform:scaleX(1);}
+.cat-ico{width:52px;height:52px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;}
+.cat-ico img{width:52px;height:52px;object-fit:contain;border-radius:10px;}
+.cat-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.3;}
+.cat-pill{margin-top:6px;background:rgba(224,0,0,0.07);border:0.5px solid rgba(224,0,0,0.2);border-radius:999px;padding:3px 9px;font-size:10px;font-weight:600;color:var(--red);}
+
+/* ── PRODUCTS ── */
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.prod-card{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(224,0,0,0.14);border-color:rgba(224,0,0,0.3);}
+.prod-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.prod-tag{position:absolute;top:8px;right:8px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;}
+.prod-img-wrap{position:relative;}
+.prod-tag-g{background:var(--gold);color:#5a3a00;}
+.prod-body{padding:10px 12px 12px;}
+.prod-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.prod-price{font-size:15px;font-weight:900;color:var(--red);}
+
+/* ── TRUST ── */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:500px){.trust-grid{grid-template-columns:repeat(2,1fr);}}
+.trust-card{background:#fff;border-radius:14px;border-left:3px solid var(--red);padding:14px 16px;transition:transform .2s,box-shadow .2s;}
+.trust-card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(224,0,0,0.12);}
+.trust-val{font-size:22px;font-weight:900;}
+.trust-lbl{font-size:10px;font-weight:700;color:var(--red);margin-top:2px;}
+.trust-desc{font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* ── SVC ── */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.svc-card{border-radius:16px;overflow:hidden;text-decoration:none;border:1.5px solid var(--border);transition:border-color .18s,transform .2s;}
+.svc-card:hover{border-color:rgba(224,0,0,0.4);transform:translateY(-3px);}
+.svc-img{height:110px;background:linear-gradient(135deg,#1a0000,#3d0000);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.svc-body{background:#fff;padding:12px 14px;}
+.svc-name{font-size:13px;font-weight:700;color:var(--text);}
+
+/* ── REVIEWS ── */
+.rev-strip-wrap{overflow:hidden;position:relative;padding:4px 0 12px;}
+.rev-strip{display:flex;gap:12px;width:max-content;animation:revScroll 22s linear infinite;}
+.rev-strip:hover{animation-play-state:paused;}
+@keyframes revScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.rev-card{flex:0 0 200px;background:#fff;border-radius:15px;border:1px solid var(--border);padding:14px;position:relative;overflow:hidden;}
+.rev-quote{position:absolute;top:0;right:8px;font-size:48px;font-family:serif;color:rgba(224,0,0,0.05);line-height:1;pointer-events:none;}
+.rev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.rev-ava{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-d));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;}
+.rev-stars{font-size:10px;color:var(--gold);}
+.rev-name{font-size:11px;font-weight:700;margin-bottom:4px;}
+.rev-text{font-size:11px;color:#666;line-height:1.5;}
+
+/* ── GUIDE ── */
+.guide-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:500px){.guide-grid{grid-template-columns:repeat(2,1fr);}}
+.guide-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:16px;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;transition:border-color .18s,transform .18s;}
+.guide-card:hover{border-color:rgba(224,0,0,0.3);transform:translateY(-2px);}
+.guide-ico{width:44px;height:44px;border-radius:12px;background:rgba(224,0,0,0.07);display:flex;align-items:center;justify-content:center;font-size:20px;}
+.guide-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.3;}
+
+/* ── CONTACT ── */
+.msg-card{background:var(--red);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:13px;text-decoration:none;margin-bottom:10px;transition:background .15s,transform .15s;}
+.msg-card:hover{background:var(--red-d);transform:translateY(-1px);}
+.msg-ico{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;}
+.msg-info{flex:1;}
+.msg-name{font-size:15px;font-weight:700;color:#fff;}
+.msg-desc{font-size:12px;color:rgba(255,255,255,0.75);margin-top:1px;}
+.msg-open{background:rgba(255,255,255,0.2);border-radius:8px;padding:5px 11px;font-size:13px;font-weight:700;color:#fff;}
+.fb-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:13px 16px;display:flex;align-items:center;gap:13px;text-decoration:none;transition:border-color .18s,transform .15s;}
+.fb-card:hover{border-color:#1877f2;transform:translateY(-1px);}
+.fb-ico{width:42px;height:42px;border-radius:11px;background:#e8f0fe;display:flex;align-items:center;justify-content:center;}
+.fb-info{flex:1;}
+.fb-name{font-size:14px;font-weight:700;color:var(--text);}
+.fb-desc{font-size:12px;color:var(--muted);}
+.chevron{color:#ccc;font-size:20px;}
+.hours{background:#f0fff5;border-radius:13px;padding:11px 15px;display:flex;align-items:center;gap:9px;margin-top:10px;border:1px solid rgba(0,180,80,0.2);}
+.h-dot{width:8px;height:8px;border-radius:50%;background:#00c851;flex-shrink:0;animation:blink 1.5s infinite;}
+.h-text{font-size:12px;color:#555;}
+.h-text b{color:#111;font-weight:700;}
+
+/* ── DIVIDER ── */
+.div{height:1px;background:linear-gradient(90deg,transparent,rgba(224,0,0,0.12),transparent);margin:24px 20px 0;}
+
+/* ── FOOTER ── */
+footer{background:#111;padding:28px 20px 40px;text-align:center;margin-top:24px;}
+.foot-name{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;}
+.foot-links{display:flex;justify-content:center;gap:16px;margin:12px 0;}
+.foot-link{font-size:12px;color:#888;text-decoration:none;}
+.foot-link:hover{color:#fff;}
+.foot-copy{font-size:11px;color:#555;}
+
+/* ── OVERLAY / SHEET ── */
+.ck-overlay{display:none;position:fixed;inset:0;z-index:2147483647;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);}
+.ck-overlay.open{display:flex;}
+.ck-sheet{background:#fff;border-radius:22px;width:100%;max-width:360px;max-height:85vh;overflow-y:auto;padding:20px 18px 24px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.25);overflow:hidden;}
+.ck-sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e00000,#ffc300,#e00000);}
+.ck-sheet-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:#f0f0f0;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:#555;z-index:99;}
+.ck-sheet-close:active{background:#ddd;}
+.ck-sheet-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.ck-sheet-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ck-sheet-title{font-size:16px;font-weight:800;color:#111;}
+.ck-sheet-sub{font-size:11px;color:#888;font-weight:400;margin-top:2px;}
+.ck-info-box{background:#f8f8f8;border-radius:13px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:flex-start;gap:10px;}
+.ck-info-box-ico{font-size:20px;flex-shrink:0;margin-top:1px;}
+.ck-info-box-text{font-size:12px;color:#555;line-height:1.6;}
+.ck-info-box-text b{color:#111;font-weight:700;}
+.ck-sheet-btn{width:100%;padding:13px;border-radius:13px;border:none;cursor:pointer;font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;}
+
+/* DARK MODE */
+body.dark{--card:#1a1a1a;--text:#f0f0f0;--muted:#888;--border:#333;}
+body.dark .col{background:#111;}
+body.dark .hero-card,.body.dark .cat-card,.body.dark .prod-card,.body.dark .svc-body,.body.dark .rev-card,.body.dark .trust-card,.body.dark .guide-card,.body.dark .fb-card{background:#1a1a1a;}
+body.dark .cat-card{background:#1a1a1a;}
+body.dark .prod-card{background:#1a1a1a;}
+body.dark .trust-card{background:#1a1a1a;}
+body.dark .rev-card{background:#1a1a1a;}
+body.dark .guide-card{background:#1a1a1a;}
+body.dark .fb-card{background:#1a1a1a;}
+body.dark .svc-body{background:#1a1a1a;}
+body.dark .btn-s{background:#2a2a2a;color:#ddd;border-color:#444;}
+body.dark .hours{background:#1a2a1a;}
+body.dark footer{background:#0a0a0a;}
+/* nav stays white always */
+.nav{background:#fff !important;}
+.nav-name{color:#000 !important;}
+body.dark .hero-title{color:#fff !important;}
+body.dark .hero-title em{color:var(--red) !important;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-name">CEO <em>KAITAN</em></div>
+    <div class="nav-right">
+      <a href="#contact" class="nav-icon-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </a>
+      <button class="nav-icon-btn" id="darkToggle">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="https://www.messenger.com/channel/ceokaitan" target="_blank" class="nav-cta">สั่งซื้อ</a>
+    </div>
+  </div>
+</nav>
+
+<div class="col">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-card">
+    <div class="hero-top">
+      <div class="hero-logo" style="padding:0;overflow:hidden;background:transparent;box-shadow:none;"><img src="https://img1.pic.in.th/images/-180_20260109221101.png" style="width:100%;height:100%;object-fit:contain;border-radius:18px;display:block;"></div>
+      <div class="hero-info">
+        <div class="hero-title">CEO <em>KAITAN</em></div>
+        <div class="hero-sub">ร้านไอดีไก่ตัน Blox Fruit ราคาถูก<br>ผลแดงการันตี ครบจบ ปลอดภัย 🔥</div>
+        <div class="hero-open"><div class="hero-dot"></div>เปิดให้บริการ 08:30–23:00 น.</div>
+      </div>
+    </div>
+    <div class="hero-badges">
+      <div class="ck-badge ck-badge-gold" data-sheet="review">⭐ 5.0 รีวิว</div>
+      <div class="ck-badge ck-badge-red" data-sheet="fast">🔥 ส่งไว</div>
+      <div class="ck-badge ck-badge-gold" data-sheet="famous">👑 ร้านดัง</div>
+      <div class="ck-badge ck-badge-green" data-sheet="safe">✅ ปลอดภัย 100%</div>
+    </div>
+    <div class="hero-btns">
+      <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="btn-p">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>ดูสินค้า
+      </a>
+      <a href="https://www.messenger.com/channel/ceokaitan" target="_blank" class="btn-s">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.919 1.409 5.523 3.614 7.229V22l3.305-1.814c.883.244 1.817.376 2.781.376 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.009 12.445l-2.55-2.72-4.977 2.72 5.476-5.812 2.614 2.719 4.914-2.719-5.477 5.812z"/></svg>ติดต่อสั่งซื้อ
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- CATEGORIES -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e00000" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> หมวดหมู่สินค้า</div>
+    <div class="sec-sub">เลือกหมวดหมู่ที่สนใจได้เลย</div>
+  </div>
+  <div class="cat-grid">
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
+      <div class="cat-ico"><img src="https://pic.in.th/image/ROBUX.D3ISTO" alt="ROBLOX"></div>
+      <div class="cat-name">ไก่ตันคัดพิเศษ<br>ROBLOX</div>
+      <div class="cat-pill">HOT 🔥</div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
+      <div class="cat-ico"><img src="https://pic.in.th/image/24ff776b-c430-4550-853b-58492df82a0f.D3Ix4A" alt="ROV"></div>
+      <div class="cat-name">เติมคูปอง<br>ROV</div>
+      <div class="cat-pill">เปิดดู ›</div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
+      <div class="cat-ico"><img src="https://pic.in.th/image/8984f4fb-cccb-4df6-a406-feafbf0d82ff.D3IcHP" alt="MLBB"></div>
+      <div class="cat-name">เติมเพชร<br>MLBB</div>
+      <div class="cat-pill">เปิดดู ›</div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="cat-card">
+      <div class="cat-ico"><img src="https://pic.in.th/image/e6b8d9a4-08bf-40fc-abee-de43711d6286.D3IXjc" alt="FREEFIRE"></div>
+      <div class="cat-name">เติมเพชร<br>FREEFIRE</div>
+      <div class="cat-pill">เปิดดู ›</div>
+    </a>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- PRODUCTS -->
+<div class="sec">
+  <div class="sec-row">
+    <div>
+      <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="#e00000"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg> สินค้าแนะนำ</div>
+      <div class="sec-sub">ของดี ราคาถูก คุ้มที่สุด</div>
+    </div>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="see-all">ดูทั้งหมด ›</a>
+  </div>
+  <div class="prod-grid">
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://pic.in.th/image/202390644aa21f4d50beaa0ed7b221455b0621c23e0d8c04de53c82ae3a7ad71-%282%29.D3bisv" alt="">
+        <div class="prod-tag">HOT</div>
+      </div>
+      <div class="prod-body"><div class="prod-name">ไก่การันตีผลแดง</div><div class="prod-price">10฿ – 99฿</div></div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://pic.in.th/image/0f6f3f0b7a20b2a8a1575c2ff5fc26ddd1949b5396e6307e4e63116afadf5b73-%281%29.D3bpDx" alt="">
+        <div class="prod-tag">HOT</div>
+      </div>
+      <div class="prod-body"><div class="prod-name">รวมไก่ผลแดง RED</div><div class="prod-price">10฿ – 159฿</div></div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="prod-card">
+      <div class="prod-img-wrap">
+        <img class="prod-img" src="https://pic.in.th/image/968376725e2f0d83ef4adf6e219c825a95405eb309751e7924afb42bf2531f77-%281%29.D3bW2C" alt="">
+        <div class="prod-tag prod-tag-g">NEW</div>
+      </div>
+      <div class="prod-body"><div class="prod-name">ผลถาวร BLOX FRUIT</div><div class="prod-price">10฿ – 999฿</div></div>
+    </a>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- SERVICES -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="#e00000"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg> บริการของทางร้าน</div>
+  </div>
+  <div class="svc-grid">
+    <a href="https://ckckshop.rdcw.xyz/categories/cmgl8dnu600l04dd4dx5c3jip" target="_blank" class="svc-card">
+      <div class="svc-img" style="padding:0;height:130px;"><img src="https://pic.in.th/image/48bdea630a92c26950e074f4cbf2c7334e281e5a7e7c22986d619af4ed89e8fe.DKsuZH" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="svc-body"><div class="svc-name">บริการจำหน่ายไอดีไก่ตัน Blox Fruit ราคาย่อมเยา</div></div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories/cm6dw6w0f0013d4i7d1yaojl0" target="_blank" class="svc-card">
+      <div class="svc-img" style="padding:0;height:130px;"><img src="https://pic.in.th/image/c3329ed2ed531e9d2b47d419919e166e6ad8d66c7a1c4dad454e05adb57d5c3b.DKsyfy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="svc-body"><div class="svc-name">บริการเกมพาส เติมได้ทุกแมพที่มีระบบ</div></div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="svc-card">
+      <div class="svc-img" style="padding:0;height:130px;"><img src="https://pic.in.th/image/02d6cca20df70ab406a974b47b32aeadf3c6d948e1e3528365a4ffae3373a0ab.DKsw5C" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="svc-body"><div class="svc-name">บริการรวมผลถาวร BLOX FRUIT ทุกชนิด</div></div>
+    </a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="svc-card">
+      <div class="svc-img" style="padding:0;height:130px;"><img src="https://pic.in.th/image/05fc2a6cd85773ea63d0f221bb59c9e8ec3674810de674893eb7b669306e9e6c.DKsEIv" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="svc-body"><div class="svc-name">บริการไก่ตันคัดพิเศษ การันตีผลแดง</div></div>
+    </a>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- TRUST -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e00000" stroke-width="2.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg> ทำไมต้อง CEO KAITAN?</div>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-card" data-trust="safe" style="cursor:pointer;"><div class="trust-val">100%</div><div class="trust-lbl">ปลอดภัย</div><div class="trust-desc">ยืนยันทุกออเดอร์</div></div>
+    <div class="trust-card" data-trust="customer" style="cursor:pointer;"><div class="trust-val">100,000+</div><div class="trust-lbl">ลูกค้า</div><div class="trust-desc">ที่ไว้ใจใช้บริการ</div></div>
+    <div class="trust-card" data-trust="fast" style="cursor:pointer;"><div class="trust-val">&lt;5 นาที</div><div class="trust-lbl">รวดเร็ว</div><div class="trust-desc">ส่งไอเทมภายใน</div></div>
+    <div class="trust-card" data-trust="score" style="cursor:pointer;"><div class="trust-val">80%+</div><div class="trust-lbl">การซื้อซ้ำ</div><div class="trust-desc">ลูกค้าประจำ</div></div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- REVIEWS -->
+<div class="sec">
+  <div class="sec-row">
+    <div>
+      <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e00000" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> รีวิวจากลูกค้า</div>
+      <div class="sec-sub">⭐ 5.0 · 500+ รีวิว</div>
+    </div>
+    <a href="https://www.facebook.com/ceokaitan/reviews/" target="_blank" class="see-all">ดูทั้งหมด ›</a>
+  </div>
+  <div class="rev-strip-wrap">
+    <div class="rev-strip">
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ก</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">กล้า ไง</div><div class="rev-text">ร้านดีมาก ของครบ แอดตอบไว ได้รหัสเร็วมาก!</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ส</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">สุภชัย</div><div class="rev-text">ไวมากดีมาก 👌 ได้ผลแดงตามที่การันตีจริงๆ</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">อ</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">อัษฎาพล</div><div class="rev-text">ปลอดภัย งานไว ต้องที่นี้ที่เดียวเลยครับ!</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ณ</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">ณัฐ</div><div class="rev-text">สั่งหลายรอบแล้ว ไม่เคยผิดหวัง แอดตอบเร็วมาก</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ป</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">ปณวัตร</div><div class="rev-text">บริการดี งานไว ไว้วางใจได้เลยครับ!</div></div>
+      <!-- clone สำหรับ loop -->
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ก</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">กล้า ไง</div><div class="rev-text">ร้านดีมาก ของครบ แอดตอบไว ได้รหัสเร็วมาก!</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ส</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">สุภชัย</div><div class="rev-text">ไวมากดีมาก 👌 ได้ผลแดงตามที่การันตีจริงๆ</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">อ</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">อัษฎาพล</div><div class="rev-text">ปลอดภัย งานไว ต้องที่นี้ที่เดียวเลยครับ!</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ณ</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">ณัฐ</div><div class="rev-text">สั่งหลายรอบแล้ว ไม่เคยผิดหวัง แอดตอบเร็วมาก</div></div>
+      <div class="rev-card"><div class="rev-quote">"</div><div class="rev-top"><div class="rev-ava">ป</div><div class="rev-stars">★★★★★</div></div><div class="rev-name">ปณวัตร</div><div class="rev-text">บริการดี งานไว ไว้วางใจได้เลยครับ!</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- GUIDE -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e00000" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg> คู่มือใช้งาน & วิธีสั่งซื้อ</div>
+  </div>
+  <div class="guide-grid">
+    <a href="https://youtu.be/zD6OgT__Y8c" target="_blank" class="guide-card"><div class="guide-ico">▶️</div><div class="guide-name">วิธีสมัครสมาชิก</div></a>
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="guide-card"><div class="guide-ico">🛒</div><div class="guide-name">วิธีซื้อไอดีไก่ตัน</div></a>
+    <a href="https://www.messenger.com/channel/ceokaitan" target="_blank" class="guide-card"><div class="guide-ico">💬</div><div class="guide-name">สอบถาม Messenger</div></a>
+    <a href="https://www.facebook.com/ceokaitan" target="_blank" class="guide-card"><div class="guide-ico">📘</div><div class="guide-name">ติดตามเพจ Facebook</div></a>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- CONTACT -->
+<div class="sec" id="contact">
+  <div class="sec-head">
+    <div class="sec-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e00000" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> ติดต่อ & สั่งซื้อ</div>
+    <div class="sec-sub">เลือกช่องทางที่สะดวกได้เลย</div>
+  </div>
+  <a href="https://www.messenger.com/channel/ceokaitan" target="_blank" class="msg-card">
+    <div class="msg-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.919 1.409 5.523 3.614 7.229V22l3.305-1.814c.883.244 1.817.376 2.781.376 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.009 12.445l-2.55-2.72-4.977 2.72 5.476-5.812 2.614 2.719 4.914-2.719-5.477 5.812z"/></svg></div>
+    <div class="msg-info"><div class="msg-name">Messenger</div><div class="msg-desc">ตอบเร็วที่สุด • เปิด 08:30–23:00 น.</div></div>
+    <div class="msg-open">เปิด ›</div>
+  </a>
+  <a href="https://www.facebook.com/ceokaitan" target="_blank" class="fb-card">
+    <div class="fb-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 4.96 3.63 9.08 8.4 9.8v-6.93h-2.53v-2.87h2.53v-2.18c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.85h2.8l-.45 2.87h-2.35v6.93c4.77-.72 8.4-4.84 8.4-9.8 0-5.5-4.46-9.96-9.96-9.96z"/></svg></div>
+    <div class="fb-info"><div class="fb-name">Facebook Page</div><div class="fb-desc">@ ceokaitan</div></div>
+    <span class="chevron">›</span>
+  </a>
+  <div class="hours">
+    <div class="h-dot"></div>
+    <div class="h-text">ทีมงานพร้อมให้บริการ <b>ทุกวัน 08:30–23:00 น.</b> ตอบกลับภายใน 5–15 นาที</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-name">CEO KAITAN</div>
+  <div class="foot-links">
+    <a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="foot-link">สินค้า</a>
+    <a href="https://www.facebook.com/ceokaitan" target="_blank" class="foot-link">Facebook</a>
+    <a href="https://www.messenger.com/channel/ceokaitan" target="_blank" class="foot-link">Messenger</a>
+    <a href="https://youtu.be/zD6OgT__Y8c" target="_blank" class="foot-link">YouTube</a>
+  </div>
+  <div class="foot-copy">© 2026 CEO KAITAN · All rights reserved.</div>
+</footer>
+
+</div><!-- end .col -->
+
+<!-- OVERLAY -->
+<div class="ck-overlay" id="ckOverlay">
+  <div class="ck-sheet" id="ckSheet">
+    <button class="ck-sheet-close" id="ckCloseBtn">✕</button>
+    <div id="ckSheetContent"></div>
+  </div>
+</div>
+
+<script>
+var trustSheets = {
+  safe: {
+    icon:'🔒', title:'ปลอดภัย 100%', sub:'ซื้อสบายใจ ไม่มีโกง ไม่มีความเสี่ยง',
+    body:`
+      <div style="background:linear-gradient(135deg,#f0fff4,#e8fff0);border-radius:14px;padding:14px;margin-bottom:12px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:6px;">🛡️</div>
+        <div style="font-size:22px;font-weight:900;color:#00a050;">ระบบรับประกัน 100%</div>
+        <div style="font-size:12px;color:#555;margin-top:4px;">ทุกออเดอร์ได้รับการยืนยัน</div>
+      </div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🏪</div><div class="ck-info-box-text"><b>ระบบสั่งซื้ออัตโนมัติ</b> ผ่านเว็บ ckckshop.rdcw.xyz ชำระเงินแล้วได้ของทันที ไม่ต้องรอ ไม่ต้องทัก</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">✅</div><div class="ck-info-box-text"><b>รับประกันสินค้า</b> หากได้ของไม่ตรงหรือมีปัญหา แจ้งแอดได้เลย ทีมงานพร้อมแก้ไขให้ทันที <b>(ต้องมีคลิปเท่านั้น)</b></div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🔐</div><div class="ck-info-box-text">ข้อมูลลูกค้า<b>ปลอดภัยทุกขั้นตอน</b> ไม่มีการเก็บรหัสผ่าน ไม่มีการแฮก ใช้ระบบชำระเงินมาตรฐาน</div></div>
+    `,
+    btn: {url:'https://ckckshop.rdcw.xyz/categories', label:'ซื้อสินค้าได้เลย', color:'#00a050'}
+  },
+  customer: {
+    icon:'👑', title:'100,000+ ลูกค้า', sub:'ร้านไอดีไก่ตันที่ลูกค้าไว้ใจมากที่สุด',
+    body:`
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+        <div style="background:#fff0ee;border-radius:14px;padding:14px;text-align:center;">
+          <div style="font-size:24px;font-weight:900;color:#e00000;">100,000+</div>
+          <div style="font-size:11px;font-weight:600;color:#e00000;margin-top:2px;">ลูกค้าทั้งหมด</div>
+        </div>
+        <div style="background:#fff8e0;border-radius:14px;padding:14px;text-align:center;">
+          <div style="font-size:24px;font-weight:900;color:#cc8800;">3+ ปี</div>
+          <div style="font-size:11px;font-weight:600;color:#cc8800;margin-top:2px;">เปิดมาแล้ว</div>
+        </div>
+      </div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">📈</div><div class="ck-info-box-text">CEO KAITAN เปิดให้บริการมากกว่า <b>3 ปี</b> มีลูกค้ากลับมาซื้อซ้ำกว่า 80% เพราะคุณภาพและความน่าเชื่อถือ</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">📱</div><div class="ck-info-box-text">ติดตามได้ที่ <b>Facebook, TikTok, YouTube</b> ช่อง CEOKAITAN รวมผู้ติดตามกว่า <b>100,000 คน</b> และมีคอนเทนต์อัปเดตทุกวัน</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🏆</div><div class="ck-info-box-text">ได้รับการยอมรับว่าเป็นร้านไอดีไก่ตัน <b>ที่น่าเชื่อถือที่สุด</b> ในวงการ Blox Fruit ของไทย</div></div>
+    `,
+    btn: {url:'https://www.facebook.com/ceokaitan', label:'ติดตามเพจ CEO KAITAN', color:'#1877f2'}
+  },
+  fast: {
+    icon:'⚡', title:'ส่งไว ภายใน 5 นาที', sub:'สั่งปุ๊บ ได้ของปั๊บ ไม่ต้องรอ',
+    body:`
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+        <div style="background:#fff0ee;border-radius:14px;padding:14px;text-align:center;">
+          <div style="font-size:24px;font-weight:900;color:#e00000;">&lt; 5 นาที</div>
+          <div style="font-size:11px;font-weight:600;color:#e00000;margin-top:2px;">เวลาส่งเฉลี่ย</div>
+        </div>
+        <div style="background:#f0fff5;border-radius:14px;padding:14px;text-align:center;">
+          <div style="font-size:24px;font-weight:900;color:#00a050;">24/7</div>
+          <div style="font-size:11px;font-weight:600;color:#00a050;margin-top:2px;">ระบบออโต้</div>
+        </div>
+      </div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🤖</div><div class="ck-info-box-text"><b>ระบบส่งอัตโนมัติ 100%</b> ชำระเงินแล้วได้รหัสทันที ไม่ต้องรอทักแอด ไม่มีดีเลย์</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🕐</div><div class="ck-info-box-text">ทีมงานออนไลน์ <b>ทุกวัน 08:30 – 23:00 น.</b> หากมีปัญหาตอบกลับภายใน 5–15 นาที</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">📦</div><div class="ck-info-box-text">สินค้าพร้อมส่งทันที ไม่มี <b>out of stock</b> ในระบบ มีสต็อกรองรับทุกออเดอร์</div></div>
+    `,
+    btn: {url:'https://www.messenger.com/channel/ceokaitan', label:'สั่งซื้อเดี๋ยวนี้เลย', color:'#e00000'}
+  },
+  score: {
+    icon:'⭐', title:'5.0 คะแนนเต็ม', sub:'ลูกค้าทุกคนพึงพอใจ 100%',
+    body:`
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+          <span style="font-size:52px;font-weight:900;color:#111;line-height:1;">5.0</span>
+          <div>
+            <div style="font-size:28px;letter-spacing:3px;color:#f5a623;">★★★★★</div>
+            <div style="font-size:11px;color:#aaa;margin-top:3px;">(500+ รีวิว)</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#555;margin-top:8px;">CEO KAITAN — คะแนนเต็ม ข้อมูลล่าสุด 2026</div>
+      </div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">💬</div><div class="ck-info-box-text">มีรีวิวจากลูกค้าจริงกว่า <b>500+ รีวิว</b> ยืนยันจากเพจ Facebook CEO KAITAN คะแนนเต็ม 5.0 ทุกออเดอร์</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🎁</div><div class="ck-info-box-text">รีวิวเพจแล้วลุ้นรับ <b>ไก่ตันผลแดงฟรี!</b> สุ่มแจกให้ผู้โชคดีทุกเดือน ไม่มีค่าใช้จ่าย</div></div>
+      <div class="ck-info-box"><div class="ck-info-box-ico">🔥</div><div class="ck-info-box-text">ลูกค้ากว่า <b>80%</b> กลับมาสั่งซื้อซ้ำ เพราะพอใจในคุณภาพสินค้าและบริการ</div></div>
+    `,
+    btn: {url:'https://www.facebook.com/ceokaitan/reviews/', label:'ไปดูรีวิวเพจเลย', color:'#1877f2'}
+  }
+};
+function openTrust(key){
+  var s = trustSheets[key];
+  if(!s) return;
+  var contentEl = document.getElementById('ckSheetContent');
+  contentEl.innerHTML = '';
+  var items = [];
+  items.push('<div class="ck-sheet-head"><div class="ck-sheet-icon" style="background:rgba(224,0,0,0.08);">'+s.icon+'</div><div><div class="ck-sheet-title">'+s.title+'</div><div class="ck-sheet-sub">'+s.sub+'</div></div></div>');
+  items.push(s.body);
+  if(s.btn) items.push('<a href="'+s.btn.url+'" target="_blank" class="ck-sheet-btn" style="background:'+s.btn.color+';">'+s.btn.label+'</a>');
+  items.forEach(function(html, i){
+    var wrap = document.createElement('div');
+    wrap.innerHTML = html;
+    var el = wrap.firstElementChild;
+    el.style.opacity='0'; el.style.transform='translateY(16px)';
+    contentEl.appendChild(el);
+    setTimeout(function(){ el.style.transition='opacity .3s ease,transform .35s cubic-bezier(.34,1.4,.64,1)'; el.style.opacity='1'; el.style.transform='translateY(0)'; }, 60+i*100);
+  });
+  document.getElementById('ckOverlay').classList.add('open');
+}
+
+var sheets = {
+  review: [
+    '<div style="text-align:center;padding:4px 0 4px;"><div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 4.96 3.63 9.08 8.4 9.8v-6.93h-2.53v-2.87h2.53v-2.18c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.85h2.8l-.45 2.87h-2.35v6.93c4.77-.72 8.4-4.84 8.4-9.8 0-5.5-4.46-9.96-9.96-9.96z"/></svg><span style="font-size:16px;font-weight:800;color:#1877F2;">facebook</span><span style="font-size:16px;font-weight:800;color:#111;">Reviews</span></div><div style="font-size:11px;color:#888;margin-bottom:16px;">ยืนยันจากเพจ Facebook CEO KAITAN</div></div>',
+    '<div style="text-align:center;"><div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px;"><span style="font-size:52px;font-weight:900;color:#111;line-height:1;">5.0</span><div style="font-size:30px;letter-spacing:3px;color:#f5a623;">★★★★★</div></div><div style="font-size:11px;color:#aaa;">(500+ รีวิว)</div></div>',
+    '<div style="font-size:12px;color:#555;text-align:center;margin-top:8px;margin-bottom:16px;">CEO KAITAN — คะแนนเต็ม ข้อมูลล่าสุด 2026</div>',
+    '<a href="https://www.facebook.com/ceokaitan/reviews/" target="_blank" class="ck-sheet-btn" style="background:#1877f2;"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 4.96 3.63 9.08 8.4 9.8v-6.93h-2.53v-2.87h2.53v-2.18c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.85h2.8l-.45 2.87h-2.35v6.93c4.77-.72 8.4-4.84 8.4-9.8 0-5.5-4.46-9.96-9.96-9.96z"/></svg>ไปดูรีวิวเพจเลย</a>'
+  ],
+  fast: [
+    '<div class="ck-sheet-head"><div class="ck-sheet-icon" style="background:#fff0ee;">🔥</div><div><div class="ck-sheet-title">บริการส่งไว</div><div class="ck-sheet-sub">ได้ของเร็ว ไม่ต้องรอนาน</div></div></div>',
+    '<div class="ck-info-box"><div class="ck-info-box-ico">🕐</div><div class="ck-info-box-text">เปิดบริการ <b>ทุกวัน 08:30 – 23:00 น.</b><br>ตอบกลับภายใน 5–15 นาที</div></div>',
+    '<a href="https://www.messenger.com/channel/ceokaitan" target="_blank" class="ck-sheet-btn" style="background:#e00000;"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.919 1.409 5.523 3.614 7.229V22l3.305-1.814c.883.244 1.817.376 2.781.376 5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.009 12.445l-2.55-2.72-4.977 2.72 5.476-5.812 2.614 2.719 4.914-2.719-5.477 5.812z"/></svg>สั่งซื้อเดี๋ยวนี้เลย</a>'
+  ],
+  famous: [
+    '<div class="ck-sheet-head"><div class="ck-sheet-icon" style="background:#fff8e0;">👑</div><div><div class="ck-sheet-title">ร้านดัง CEO KAITAN</div><div class="ck-sheet-sub">ร้านไอดีไก่ตันอันดับต้นของไทย</div></div></div>',
+    '<div class="ck-info-box"><div class="ck-info-box-ico">📱</div><div class="ck-info-box-text">ติดตามได้ที่ <b>Facebook, TikTok, YouTube</b> ช่อง CEOKAITAN มีผู้ติดตามรวมกว่า <b>100,000 คน</b> และมีคอนเทนต์อัปเดตทุกวัน</div></div>',
+    '<a href="https://www.facebook.com/ceokaitan" target="_blank" class="ck-sheet-btn" style="background:#e00000;">ติดตามเพจ CEO KAITAN</a>'
+  ],
+  safe: [
+    '<div class="ck-sheet-head"><div class="ck-sheet-icon" style="background:#f0fff5;">✅</div><div><div class="ck-sheet-title">ปลอดภัย 100%</div><div class="ck-sheet-sub">ซื้อสบายใจ มีระบบรับประกัน</div></div></div>',
+    '<div class="ck-info-box"><div class="ck-info-box-ico">🛡️</div><div class="ck-info-box-text">มี <b>รับประกันสินค้า</b> หากได้ของไม่ตรงแจ้งแอดได้เลย แก้ไขให้ทันที ไม่มีปัญหา <b>(ต้องมีคลิปเท่านั้น)</b></div></div>',
+    '<a href="https://ckckshop.rdcw.xyz/categories" target="_blank" class="ck-sheet-btn" style="background:#00a050;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>ซื้อสินค้าได้เลย</a>'
+  ]
+};
+function ckOpen(type){
+  var overlay=document.getElementById('ckOverlay');
+  var contentEl=document.getElementById('ckSheetContent');
+  contentEl.innerHTML='';
+  overlay.classList.add('open');
+  sheets[type].forEach(function(html,i){
+    var wrap=document.createElement('div');wrap.innerHTML=html;
+    var el=wrap.firstElementChild;
+    el.style.opacity='0';el.style.transform='translateY(16px)';
+    contentEl.appendChild(el);
+    setTimeout(function(){el.style.transition='opacity .3s ease,transform .35s cubic-bezier(.34,1.4,.64,1)';el.style.opacity='1';el.style.transform='translateY(0)';},60+i*100);
+  });
+}
+function ckClose(){
+  document.getElementById('ckOverlay').classList.remove('open');
+  setTimeout(function(){document.getElementById('ckSheetContent').innerHTML='';},100);
+}
+function ckHandle(e){
+  var t=e.target.closest('.trust-card[data-trust]');
+  if(t){e.preventDefault();openTrust(t.getAttribute('data-trust'));return;}
+  var b=e.target.closest('.ck-badge[data-sheet]');
+  if(b){e.preventDefault();ckOpen(b.getAttribute('data-sheet'));return;}
+  if(e.target.closest('#ckCloseBtn')){e.preventDefault();e.stopPropagation();ckClose();return;}
+  if(e.target===document.getElementById('ckOverlay')){e.preventDefault();ckClose();}
+}
+document.addEventListener('click',ckHandle);
+document.addEventListener('touchend',ckHandle,{passive:false});
+
+// Dark mode
+document.getElementById('darkToggle').addEventListener('click',function(){
+  document.body.classList.toggle('dark');
+  this.innerHTML=document.body.classList.contains('dark')
+    ?'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+    :'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+});
+</script>
+</body>
+</html>
