@@ -595,108 +595,80 @@ document.addEventListener('touchend',ckHandle,{passive:false});
   var logo = document.querySelector('.hero-logo');
   if(!logo) return;
 
-  var dragging = false;
-  var startMouseX, startMouseY, startLeft, startTop;
-  var origLeft, origTop;
+  var dragging = false, moved = false;
+  var startMX, startMY, origRect;
+  var THRESHOLD = 8;
 
-  function getRect(){
-    var r = logo.getBoundingClientRect();
-    return r;
-  }
+  // wrapper ที่อยู่ใน flow เพื่อจับที่ไว้
+  var wrap = document.createElement('div');
+  wrap.style.cssText = 'display:inline-flex;flex-shrink:0;';
+  logo.parentNode.insertBefore(wrap, logo);
+  wrap.appendChild(logo);
 
-  function startDrag(mx, my){
+  logo.style.cursor = 'grab';
+  logo.style.userSelect = 'none';
+  logo.style.webkitUserSelect = 'none';
+
+  function onDown(mx, my){
+    startMX = mx; startMY = my;
+    moved = false;
     dragging = true;
-    logo.style.animationPlayState = 'paused';
-    logo.style.transition = 'none';
-    logo.style.cursor = 'grabbing';
-    logo.style.zIndex = '9999';
-
-    var r = logo.getBoundingClientRect();
-    origLeft = r.left;
-    origTop = r.top;
-
-    // สร้าง placeholder เพื่อจับที่ไว้ ข้อความไม่ขยับ
-    var ph = document.createElement('div');
-    ph.id = 'logoPH';
-    ph.style.cssText = 'width:' + r.width + 'px;height:' + r.height + 'px;flex-shrink:0;';
-    logo.parentNode.insertBefore(ph, logo);
-
-    logo.style.position = 'fixed';
-    logo.style.left = r.left + 'px';
-    logo.style.top = r.top + 'px';
-    logo.style.margin = '0';
-
-    startMouseX = mx;
-    startMouseY = my;
-    startLeft = r.left;
-    startTop = r.top;
   }
 
-  function moveDrag(mx, my){
+  function onMove(mx, my){
     if(!dragging) return;
-    var dx = mx - startMouseX;
-    var dy = my - startMouseY;
-    logo.style.left = (startLeft + dx) + 'px';
-    logo.style.top = (startTop + dy) + 'px';
+    var dx = mx - startMX;
+    var dy = my - startMY;
+    if(!moved && Math.abs(dx) < THRESHOLD && Math.abs(dy) < THRESHOLD) return;
+    if(!moved){
+      moved = true;
+      origRect = wrap.getBoundingClientRect();
+      logo.style.animationPlayState = 'paused';
+      logo.style.cursor = 'grabbing';
+      logo.style.position = 'fixed';
+      logo.style.zIndex = '9999';
+      logo.style.margin = '0';
+      logo.style.left = origRect.left + 'px';
+      logo.style.top = origRect.top + 'px';
+      logo.style.transition = 'none';
+      // placeholder ใน wrap
+      wrap.style.width = origRect.width + 'px';
+      wrap.style.height = origRect.height + 'px';
+    }
+    logo.style.left = (origRect.left + mx - startMX) + 'px';
+    logo.style.top  = (origRect.top  + my - startMY) + 'px';
   }
 
-  function endDrag(){
+  function onUp(){
     if(!dragging) return;
     dragging = false;
-    logo.style.cursor = 'grab';
+    if(!moved){ return; }
     // bounce กลับ
     logo.style.transition = 'left .5s cubic-bezier(.34,1.5,.64,1), top .5s cubic-bezier(.34,1.5,.64,1)';
-    logo.style.left = origLeft + 'px';
-    logo.style.top = origTop + 'px';
+    logo.style.left = origRect.left + 'px';
+    logo.style.top  = origRect.top  + 'px';
+    logo.style.cursor = 'grab';
     setTimeout(function(){
       logo.style.position = '';
       logo.style.left = '';
       logo.style.top = '';
+      logo.style.zIndex = '';
       logo.style.margin = '';
       logo.style.transition = '';
-      logo.style.zIndex = '';
       logo.style.animationPlayState = 'running';
-      var ph = document.getElementById('logoPH');
-      if(ph) ph.parentNode.removeChild(ph);
+      wrap.style.width = '';
+      wrap.style.height = '';
+      moved = false;
     }, 520);
   }
 
-  var pendingX, pendingY, pending = false;
+  logo.addEventListener('mousedown',  function(e){ e.preventDefault(); onDown(e.clientX, e.clientY); });
+  document.addEventListener('mousemove', function(e){ onMove(e.clientX, e.clientY); });
+  document.addEventListener('mouseup',   onUp);
 
-  logo.addEventListener('mousedown', function(e){
-    e.preventDefault();
-    pending = true;
-    pendingX = e.clientX; pendingY = e.clientY;
-  });
-  document.addEventListener('mousemove', function(e){
-    if(pending && !dragging){
-      var dx = Math.abs(e.clientX - pendingX);
-      var dy = Math.abs(e.clientY - pendingY);
-      if(dx > 5 || dy > 5){ pending = false; startDrag(pendingX, pendingY); }
-    }
-    moveDrag(e.clientX, e.clientY);
-  });
-  document.addEventListener('mouseup', function(){
-    pending = false;
-    endDrag();
-  });
-
-  logo.addEventListener('touchstart', function(e){
-    e.preventDefault();
-    pending = true;
-    pendingX = e.touches[0].clientX; pendingY = e.touches[0].clientY;
-  }, {passive:false});
-  document.addEventListener('touchmove', function(e){
-    if(pending && !dragging){
-      var dx = Math.abs(e.touches[0].clientX - pendingX);
-      var dy = Math.abs(e.touches[0].clientY - pendingY);
-      if(dx > 5 || dy > 5){ pending = false; startDrag(pendingX, pendingY); }
-    }
-    if(dragging){ e.preventDefault(); moveDrag(e.touches[0].clientX, e.touches[0].clientY); }
-  }, {passive:false});
-  document.addEventListener('touchend', function(){ pending = false; endDrag(); });
-
-  logo.style.cursor = 'grab';
+  logo.addEventListener('touchstart',  function(e){ e.preventDefault(); onDown(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+  document.addEventListener('touchmove',  function(e){ if(dragging&&moved) e.preventDefault(); onMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+  document.addEventListener('touchend',   onUp);
 })();
 
 // Dark mode
