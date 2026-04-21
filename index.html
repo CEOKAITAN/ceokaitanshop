@@ -631,9 +631,11 @@ document.addEventListener('touchend',ckHandle,{passive:false});
       logo.style.left = origRect.left + 'px';
       logo.style.top = origRect.top + 'px';
       logo.style.transition = 'none';
-      // placeholder ใน wrap
       wrap.style.width = origRect.width + 'px';
       wrap.style.height = origRect.height + 'px';
+      // เปลี่ยนภาพตอน drag
+      var img = logo.querySelector('img');
+      if(img){ img.dataset.orig = img.src; img.src = 'https://img2.pic.in.th/754ccb3558e306a8a9fd235b14ed7ce2.png'; }
     }
     logo.style.left = (origRect.left + mx - startMX) + 'px';
     logo.style.top  = (origRect.top  + my - startMY) + 'px';
@@ -658,6 +660,9 @@ document.addEventListener('touchend',ckHandle,{passive:false});
       logo.style.animationPlayState = 'running';
       wrap.style.width = '';
       wrap.style.height = '';
+      // คืนภาพเดิม
+      var img = logo.querySelector('img');
+      if(img && img.dataset.orig){ img.src = img.dataset.orig; }
       moved = false;
     }, 520);
   }
